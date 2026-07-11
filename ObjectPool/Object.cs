@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    private float lifeTime = 1f;
+    private float _lifeTime = 1f;
 
     private void OnEnable()
     {
         CancelInvoke();
-        Invoke(nameof(ReturnToPool), lifeTime);
+        Invoke(nameof(ReturnToPool), _lifeTime);
     }
 
     private void ReturnToPool()
