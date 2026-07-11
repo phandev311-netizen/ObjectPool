@@ -6,11 +6,11 @@ public class PoolManager : MonoBehaviour
     public static PoolManager Instance;
 
     [Header("Khởi tạo sẵn")]
-    [SerializeField] private int initAmount = 10;
+    [SerializeField] private int _initAmount = 10;
 
-    [SerializeField] private List<GameObject> preloadPrefabs;
+    [SerializeField] private List<GameObject> _preloadPrefabs;
 
-    private Dictionary<GameObject, ObjectPool> pools =
+    private Dictionary<GameObject, ObjectPool> _pools =
         new Dictionary<GameObject, ObjectPool>();
 
     private void Awake()
@@ -23,22 +23,22 @@ public class PoolManager : MonoBehaviour
             return;
         }
 
-        foreach (GameObject prefab in preloadPrefabs)
+        foreach (GameObject prefab in _preloadPrefabs)
         {
-            if (!pools.ContainsKey(prefab))
+            if (!_pools.ContainsKey(prefab))
             {
-                pools.Add(prefab,
-                    new ObjectPool(prefab, initAmount, transform));
+                _pools.Add(prefab,
+                    new ObjectPool(prefab, _initAmount, transform));
             }
         }
     }
 
     private ObjectPool GetPool(GameObject prefab)
     {
-        if (!pools.TryGetValue(prefab, out ObjectPool pool))
+        if (!_pools.TryGetValue(prefab, out ObjectPool pool))
         {
-            pool = new ObjectPool(prefab, initAmount, transform);
-            pools.Add(prefab, pool);
+            pool = new ObjectPool(prefab, _initAmount, transform);
+            _pools.Add(prefab, pool);
         }
 
         return pool;
