@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject prefabA;
-    [SerializeField] private GameObject prefabB;
+    [SerializeField] private GameObject _prefabA;
+    [SerializeField] private GameObject _prefabB;
 
-    private Camera cam;
+    private Camera _cam;
 
     private void Awake()
     {
-        cam = Camera.main;
+        _cam = Camera.main;
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Spawn(prefabA);
+            Spawn(_prefabA);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            Spawn(prefabB);
+            Spawn(_prefabB);
         }
     }
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = -cam.transform.position.z;
 
-        Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
+        Vector3 worldPos = _cam.ScreenToWorldPoint(mousePos);
         worldPos.z = 0;
 
         GameObject obj = PoolManager.Instance.GetObject(prefab);
