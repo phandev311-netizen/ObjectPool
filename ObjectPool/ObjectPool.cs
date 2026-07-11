@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ObjectPool
 {
-    private GameObject prefab;
-    private List<GameObject> objects = new List<GameObject>();
-    private Transform parent;
+    private GameObject _prefab;
+    private List<GameObject> _objects = new List<GameObject>();
+    private Transform _parent;
 
     public ObjectPool(GameObject prefab, int initAmount, Transform parent)
     {
-        this.prefab = prefab;
-        this.parent = parent;
+        _prefab = prefab;
+        _parent = parent;
 
         for (int i = 0; i < initAmount; i++)
         {
@@ -20,15 +20,15 @@ public class ObjectPool
 
     private GameObject CreateInstance()
     {
-        GameObject obj = Object.Instantiate(prefab, parent);
+        GameObject obj = Object.Instantiate(_prefab, _parent);
         obj.SetActive(false);
-        objects.Add(obj);
+        _objects.Add(obj);
         return obj;
     }
 
     public T GetObject<T>() where T : MonoBehaviour
     {
-        foreach (GameObject obj in objects)
+        foreach (GameObject obj in _objects)
         {
             if (!obj.activeSelf)
             {
@@ -45,7 +45,7 @@ public class ObjectPool
 
     public GameObject GetObject()
     {
-        foreach (GameObject obj in objects)
+        foreach (GameObject obj in _objects)
         {
             if (!obj.activeSelf)
             {
