@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private void Spawn(GameObject prefab)
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -cam.transform.position.z;
+        mousePos.z = -_cam.transform.position.z;
 
         Vector3 worldPos = _cam.ScreenToWorldPoint(mousePos);
         worldPos.z = 0;
